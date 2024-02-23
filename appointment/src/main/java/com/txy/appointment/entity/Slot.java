@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Slot {
+public class Slot extends BaseEntity {
 
     @Id
     @GeneratedValue(
