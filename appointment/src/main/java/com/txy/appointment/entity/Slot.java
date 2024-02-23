@@ -24,6 +24,9 @@ public class Slot extends BaseEntity {
     @Column(name = "student_id", nullable = false)
     private Long studentId;
 
+    @Column(name = "coach_id", nullable = false)
+    private Long coachId;
+
     @Column(name = "start_at", nullable = false)
     private LocalDateTime startAt;
 
