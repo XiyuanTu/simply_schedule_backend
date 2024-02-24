@@ -15,8 +15,8 @@ public class SlotServiceImpl implements SlotService {
     private final SlotRepository slotRepository;
 
     @Override
-    public List<Slot> getSlotsByStudentId(Long studentId) {
-        return slotRepository.findSlotsByStudentId(studentId).orElseThrow(() -> new ResourceNotFoundException("Slot", "studentId", String.valueOf(studentId)));
+    public List<Slot> getSlotsByStudentIdAndCoachId(Long studentId, Long coachId) {
+        return slotRepository.findSlotsByStudentIdAndCoachId(studentId, coachId).orElseThrow(() -> new ResourceNotFoundException("Slot", "studentId/coachId", studentId + "/" + coachId));
     }
 
     @Override

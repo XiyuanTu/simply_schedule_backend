@@ -28,6 +28,13 @@ public class SlotDto {
     private Long studentId;
 
     @Schema(
+            description = "Coach's id in User table",
+            example = "324243252"
+    )
+    @NotNull()
+    private Long coachId;
+
+    @Schema(
             description = "The start of the slot",
             example = "2024-02-01T15:09:00.9920024"
     )

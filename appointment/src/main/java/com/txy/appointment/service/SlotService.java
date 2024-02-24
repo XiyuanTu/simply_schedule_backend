@@ -5,7 +5,7 @@ import com.txy.appointment.entity.Slot;
 import java.util.List;
 
 public interface SlotService {
-    List<Slot> getSlotsByStudentId(Long id);
+    List<Slot> getSlotsByStudentIdAndCoachId(Long studentId, Long coachId);
     Slot getSlotById(Long id);
     Slot createSlot(Slot slot);
 

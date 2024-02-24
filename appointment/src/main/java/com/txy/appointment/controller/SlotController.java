@@ -31,14 +31,14 @@ public class SlotController {
     private final SlotService slotService;
     private final ModelMapper modelMapper;
 
-    @GetMapping("/{studentId}")
+    @GetMapping("/{studentId}/{coachId}")
     @Operation(
-            summary = "Get all the time slots picked by some student"
+            summary = "Get all the time slots for some student and some coach"
     )
     @ApiResponses({
             @ApiResponse(
-                responseCode = "200",
-                description = "Time slots fetched"
+                    responseCode = "200",
+                    description = "Time slots fetched"
             ),
             @ApiResponse(
                     responseCode = "404",
@@ -51,10 +51,10 @@ public class SlotController {
                             schema = @Schema(implementation = ErrorDto.class)
                     )
             )
-        }
+    }
     )
-    public ResponseEntity<List<SlotDto>> getSlotsByStudentId(@PathVariable Long studentId) {
-        List<Slot> slots = slotService.getSlotsByStudentId(studentId);
+    public ResponseEntity<List<SlotDto>> getSlotsByStudentIdAndCoachId(@PathVariable Long studentId, @PathVariable Long coachId) {
+        List<Slot> slots = slotService.getSlotsByStudentIdAndCoachId(studentId, coachId);
         List<SlotDto> slotDtos = slots.stream().map(slot -> modelMapper.map(slot, SlotDto.class)).toList();
         // todo: combine with user dao
         return new ResponseEntity<>(slotDtos, HttpStatus.OK);
@@ -76,7 +76,7 @@ public class SlotController {
                             schema = @Schema(implementation = ErrorDto.class)
                     )
             )
-        }
+    }
     )
     public ResponseEntity<SlotDto> createSlot(@Valid @RequestBody SlotDto slotDto) {
         Slot slot = slotService.createSlot(modelMapper.map(slotDto, Slot.class));
@@ -104,7 +104,7 @@ public class SlotController {
                             schema = @Schema(implementation = ErrorDto.class)
                     )
             )
-        }
+    }
     )
     public ResponseEntity<String> deleteSlotById(@PathVariable Long id) {
         slotService.deleteSlotById(id);
@@ -131,7 +131,7 @@ public class SlotController {
                             schema = @Schema(implementation = ErrorDto.class)
                     )
             )
-        }
+    }
     )
     public ResponseEntity<String> updateSlot(@Valid @RequestBody SlotDto slotDto) {
         slotService.updateSlot(modelMapper.map(slotDto, Slot.class));

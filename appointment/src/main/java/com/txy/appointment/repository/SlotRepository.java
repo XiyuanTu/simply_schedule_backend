@@ -10,5 +10,5 @@ import java.util.Optional;
 @Repository
 public interface SlotRepository extends JpaRepository<Slot, Long> {
 
-    Optional<List<Slot>> findSlotsByStudentId(Long studentId);
+    Optional<List<Slot>> findSlotsByStudentIdAndCoachId(Long studentId, Long coachId);
 }
