@@ -24,14 +24,12 @@ public class SlotDto {
             description = "Student's id in User table",
             example = "324243252"
     )
-    @NotNull()
     private Long studentId;
 
     @Schema(
             description = "Coach's id in User table",
             example = "324243252"
     )
-    @NotNull()
     private Long coachId;
 
     @Schema(

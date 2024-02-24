@@ -7,7 +7,7 @@ import java.util.List;
 public interface SlotService {
     List<Slot> getSlotsByStudentIdAndCoachId(Long studentId, Long coachId);
     Slot getSlotById(Long id);
-    Slot createSlot(Slot slot);
+    List<Slot> createSlots(Long studentId, Long coachId, List<Slot> slots);
 
     void deleteSlotById(Long id);
 

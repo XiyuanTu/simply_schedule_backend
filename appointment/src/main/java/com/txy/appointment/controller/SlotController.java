@@ -60,14 +60,14 @@ public class SlotController {
         return new ResponseEntity<>(slotDtos, HttpStatus.OK);
     }
 
-    @PostMapping()
+    @PostMapping("/{studentId}/{coachId}")
     @Operation(
-            summary = "Create a time slot"
+            summary = "Create time slots"
     )
     @ApiResponses({
             @ApiResponse(
                     responseCode = "201",
-                    description = "Time slot created"
+                    description = "Time slots created"
             ),
             @ApiResponse(
                     responseCode = "500",
@@ -78,9 +78,14 @@ public class SlotController {
             )
     }
     )
-    public ResponseEntity<SlotDto> createSlot(@Valid @RequestBody SlotDto slotDto) {
-        Slot slot = slotService.createSlot(modelMapper.map(slotDto, Slot.class));
-        SlotDto slotDtoResponse = modelMapper.map(slot, SlotDto.class);
+    public ResponseEntity<List<SlotDto>> createSlots(@PathVariable Long studentId, @PathVariable Long coachId, @Valid @RequestBody List<SlotDto> slotDtos) {
+        List<Slot> slots = slotDtos.stream().map(slotDto -> {
+            slotDto.setStudentId(studentId);
+            slotDto.setCoachId(coachId);
+            return modelMapper.map(slotDto, Slot.class);
+        }).toList();
+        List<Slot> savedSlots = slotService.createSlots(studentId, coachId, slots);
+        List<SlotDto> slotDtoResponse = savedSlots.stream().map(slot -> modelMapper.map(slot, SlotDto.class)).toList();
         return new ResponseEntity<>(slotDtoResponse, HttpStatus.CREATED);
     }
 

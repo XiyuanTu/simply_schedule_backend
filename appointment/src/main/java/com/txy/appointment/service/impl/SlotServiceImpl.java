@@ -6,6 +6,7 @@ import com.txy.appointment.repository.SlotRepository;
 import com.txy.appointment.service.SlotService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -25,8 +26,9 @@ public class SlotServiceImpl implements SlotService {
     }
 
     @Override
-    public Slot createSlot(Slot slot) {
-        return slotRepository.save(slot);
+    public List<Slot> createSlots(Long studentId, Long coachId, List<Slot> slots) {
+        slotRepository.deleteSlotsByStudentIdAndCoachId(studentId, coachId);
+        return slotRepository.saveAll(slots);
     }
 
     @Override
