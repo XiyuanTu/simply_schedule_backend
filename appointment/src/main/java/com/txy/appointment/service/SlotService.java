@@ -12,4 +12,6 @@ public interface SlotService {
     void deleteSlotById(Long id);
 
     void updateSlot(Slot slot);
+
+    void deleteSlotsByStudentIdAndCoachId(Long studentId, Long coachId);
 }

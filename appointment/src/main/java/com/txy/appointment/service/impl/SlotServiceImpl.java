@@ -42,4 +42,9 @@ public class SlotServiceImpl implements SlotService {
         getSlotById(slot.getId());
         slotRepository.save(slot);
     }
+
+    @Override
+    public void deleteSlotsByStudentIdAndCoachId(Long studentId, Long coachId) {
+        slotRepository.deleteSlotsByStudentIdAndCoachId(studentId, coachId);
+    }
 }
