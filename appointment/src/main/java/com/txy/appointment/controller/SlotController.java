@@ -116,6 +116,29 @@ public class SlotController {
         return new ResponseEntity<>("Deleted slot successfully", HttpStatus.OK);
     }
 
+    @DeleteMapping("/{studentId}/{coachId}")
+    @Operation(
+            summary = "Delete slots by studentId and coachId"
+    )
+    @ApiResponses({
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Time slots deleted"
+            ),
+            @ApiResponse(
+                    responseCode = "500",
+                    description = "HTTP Status Internal Server Error",
+                    content = @Content(
+                            schema = @Schema(implementation = ErrorDto.class)
+                    )
+            )
+    }
+    )
+    public ResponseEntity<String> deleteSlotsByStudentIdAndCoachId(@PathVariable Long studentId, @PathVariable Long coachId) {
+        slotService.deleteSlotsByStudentIdAndCoachId(studentId, coachId);
+        return new ResponseEntity<>("Deleted slot successfully", HttpStatus.OK);
+    }
+
     @PutMapping()
     @Operation(
             summary = "Update a time slot"
@@ -142,5 +165,6 @@ public class SlotController {
         slotService.updateSlot(modelMapper.map(slotDto, Slot.class));
         return new ResponseEntity<>("Updated slot successfully", HttpStatus.OK);
     }
+
 
 }
