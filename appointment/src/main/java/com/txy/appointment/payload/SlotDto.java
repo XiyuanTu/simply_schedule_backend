@@ -1,5 +1,7 @@
 package com.txy.appointment.payload;
 
+import com.txy.appointment.constant.AppointmentStatus;
+import com.txy.appointment.constant.SlotStatus;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotNull;
@@ -47,4 +49,6 @@ public class SlotDto {
     @NotNull()
     @FutureOrPresent
     private LocalDateTime endAt;
+
+    private SlotStatus status = SlotStatus.AVAILABLE;
 }

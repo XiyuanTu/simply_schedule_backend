@@ -1,5 +1,7 @@
 package com.txy.appointment.entity;
 
+import com.txy.appointment.constant.AppointmentStatus;
+import com.txy.appointment.constant.SlotStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -32,4 +34,8 @@ public class Slot extends BaseEntity {
 
     @Column(name = "end_at", nullable = false)
     private LocalDateTime endAt;
+
+    @Column(columnDefinition = "varchar(255) default 'AVAILABLE'")
+    @Enumerated(EnumType.STRING)
+    private SlotStatus status = SlotStatus.AVAILABLE;
 }
