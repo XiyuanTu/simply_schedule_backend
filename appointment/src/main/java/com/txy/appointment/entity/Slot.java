@@ -35,7 +35,7 @@ public class Slot extends BaseEntity {
     @Column(name = "end_at", nullable = false)
     private LocalDateTime endAt;
 
-    @Column(columnDefinition = "varchar(255) default 'AVAILABLE'")
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private SlotStatus status = SlotStatus.AVAILABLE;
+    private SlotStatus status;
 }

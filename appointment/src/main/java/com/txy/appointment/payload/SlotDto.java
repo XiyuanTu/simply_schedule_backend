@@ -50,5 +50,5 @@ public class SlotDto {
     @FutureOrPresent
     private LocalDateTime endAt;
 
-    private SlotStatus status = SlotStatus.AVAILABLE;
+    private SlotStatus status;
 }

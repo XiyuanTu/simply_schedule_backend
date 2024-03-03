@@ -35,7 +35,7 @@ public class Appointment extends BaseEntity {
     @Column(name = "end_at", nullable = false)
     private LocalDateTime endAt;
 
-    @Column(columnDefinition = "varchar(255) default 'PENDING'")
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private AppointmentStatus status = AppointmentStatus.PENDING;
+    private AppointmentStatus status;
 }

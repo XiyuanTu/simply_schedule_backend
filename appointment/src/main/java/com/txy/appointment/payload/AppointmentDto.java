@@ -50,5 +50,5 @@ public class AppointmentDto {
     @FutureOrPresent
     private LocalDateTime endAt;
 
-    private AppointmentStatus status = AppointmentStatus.PENDING;
+    private AppointmentStatus status;
 }
