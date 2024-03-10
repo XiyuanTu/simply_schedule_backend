@@ -1,7 +1,5 @@
 package com.txy.appointment.payload;
 
-import com.txy.appointment.constant.AppointmentStatus;
-import com.txy.appointment.constant.SlotStatus;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotNull;
@@ -17,16 +15,10 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Builder
 @Schema(
-        name = "Time slot"
+        name = "Coaches' available hours"
 )
-public class SlotDto {
-
+public class OpenHourDto {
     private Long id;
-    @Schema(
-            description = "Student's id in User table",
-            example = "324243252"
-    )
-    private Long studentId;
 
     @Schema(
             description = "Coach's id in User table",
@@ -49,6 +41,4 @@ public class SlotDto {
     @NotNull(message = "EndAt can't be empty")
     @FutureOrPresent
     private LocalDateTime endAt;
-
-    private SlotStatus status;
 }
