@@ -60,6 +60,35 @@ public class SlotController {
         return new ResponseEntity<>(slotDtos, HttpStatus.OK);
     }
 
+    @GetMapping("/{coachId}")
+    @Operation(
+            summary = "Get all the time slots for some coach"
+    )
+    @ApiResponses({
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Time slots fetched"
+            ),
+            @ApiResponse(
+                    responseCode = "404",
+                    description = "Time slot not found"
+            ),
+            @ApiResponse(
+                    responseCode = "500",
+                    description = "HTTP Status Internal Server Error",
+                    content = @Content(
+                            schema = @Schema(implementation = ErrorDto.class)
+                    )
+            )
+    }
+    )
+    public ResponseEntity<List<SlotDto>> getSlotsByCoachId(@PathVariable Long coachId) {
+        List<Slot> slots = slotService.getSlotsByCoachId(coachId);
+        List<SlotDto> slotDtos = slots.stream().map(slot -> modelMapper.map(slot, SlotDto.class)).toList();
+        // todo: combine with user dao
+        return new ResponseEntity<>(slotDtos, HttpStatus.OK);
+    }
+
     @PostMapping("/{studentId}/{coachId}")
     @Operation(
             summary = "Create time slots"

@@ -12,6 +12,7 @@ import java.util.Optional;
 public interface SlotRepository extends JpaRepository<Slot, Long> {
 
     Optional<List<Slot>> findSlotsByStudentIdAndCoachId(Long studentId, Long coachId);
+    Optional<List<Slot>> findSlotsByCoachId(Long coachId);
 
     @Transactional
     void deleteSlotsByStudentIdAndCoachId(Long studentId, Long coachId);

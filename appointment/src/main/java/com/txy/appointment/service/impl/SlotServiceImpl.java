@@ -32,6 +32,11 @@ public class SlotServiceImpl implements SlotService {
     }
 
     @Override
+    public List<Slot> getSlotsByCoachId(Long coachId) {
+        return slotRepository.findSlotsByCoachId(coachId).orElseThrow(() -> new ResourceNotFoundException("Slot", "coachId", String.valueOf(coachId)));
+    }
+
+    @Override
     public void deleteSlotById(Long id) {
         getSlotById(id);
         slotRepository.deleteById(id);
