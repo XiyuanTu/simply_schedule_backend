@@ -1,5 +1,6 @@
 package com.txy.appointment.service.impl;
 
+import com.txy.appointment.constant.SlotStatus;
 import com.txy.appointment.entity.Slot;
 import com.txy.appointment.exception.ResourceNotFoundException;
 import com.txy.appointment.repository.SlotRepository;
@@ -27,7 +28,7 @@ public class SlotServiceImpl implements SlotService {
 
     @Override
     public List<Slot> createSlots(Long studentId, Long coachId, List<Slot> slots) {
-        slotRepository.deleteSlotsByStudentIdAndCoachId(studentId, coachId);
+        slotRepository.deleteSlotsByStudentIdAndCoachIdAndStatus(studentId, coachId, SlotStatus.SCHEDULING);
         return slotRepository.saveAll(slots);
     }
 
@@ -50,6 +51,6 @@ public class SlotServiceImpl implements SlotService {
 
     @Override
     public void deleteSlotsByStudentIdAndCoachId(Long studentId, Long coachId) {
-        slotRepository.deleteSlotsByStudentIdAndCoachId(studentId, coachId);
+        slotRepository.deleteSlotsByStudentIdAndCoachIdAndStatus(studentId, coachId, SlotStatus.SCHEDULING);
     }
 }
