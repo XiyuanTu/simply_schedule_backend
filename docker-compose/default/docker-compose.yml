@@ -1,0 +1,47 @@
+services:
+  appointmentDB:
+    container_name: appointmentDB
+    ports:
+      - 3307:3306
+    environment:
+      MYSQL_DATABASE: appointmentDB
+    extends:
+      file: common-config.yml
+      service: microservice-db-config
+
+  configserver:
+    image: "xiyuantu/config-server:v1"
+    container_name: config-server
+    ports:
+      - "8071:8071"
+#   It seems curl can't be installed on jib image, so disable healthcheck for now
+#    healthcheck:
+#      test: "curl --fail --silent localhost:8071/actuator/health/readiness | grep UP || exit 1"
+#      interval: 10s
+#      timeout: 5s
+#      retries: 10
+#      start_period: 10s
+    extends:
+      file: common-config.yml
+      service: microservice-base-config
+
+  appointment:
+    image: "xiyuantu/appointment:v1"
+    container_name: appointment
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_APPLICATION_NAME: "appointment"
+      SPRING_DATASOURCE_URL: "jdbc:mysql://appointmentDB:3306/appointmentDB"
+    depends_on:
+      appointmentDB:
+        condition: service_healthy
+#      configserver:
+#        condition: service_healthy
+    extends:
+      file: common-config.yml
+      service: microservice-configserver-config
+
+networks:
+  simplySchedule:
+    driver: "bridge"
